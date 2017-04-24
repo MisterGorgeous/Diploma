@@ -13,4 +13,11 @@ public class BackpropagationTest {
         matrix = Backpropagation.getTheta2_grad();
     }
 
+    @Test
+    public void calculateCost() throws Exception {
+        Backpropagation.calculateCost();
+        double J = Backpropagation.getJ();
+        System.out.print(J);
+    }
+
 }

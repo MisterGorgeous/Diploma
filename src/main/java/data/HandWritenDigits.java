@@ -31,6 +31,12 @@ public class HandWritenDigits {
         return new DenseDoubleMatrix(mat);
     }
 
+    public static DenseDoubleMatrix getX() {
+        if (x == null) {
+            load();
+        }
+        return x;
+    }
 
     private static void load() {
         List<String> digits = null;
@@ -76,13 +82,25 @@ public class HandWritenDigits {
     public static DenseDoubleMatrix getYBinaryFormat(int index) {
         getY();
         if (y_binary_format == null) {
-            y_binary_format = new DenseDoubleMatrix(X_SIZE, OUTPUT_LAYER_SIZE);
-            for (int i = 0; i < X_SIZE; ++i) {
-                y_binary_format.set(i, (int) y.get(0, i), 1);
-            }
+            setY_binary_format();
         }
         double[][] mat = {y_binary_format.getRow(index)};
         return new DenseDoubleMatrix(mat);
+    }
+
+    public static DenseDoubleMatrix getYBinaryFormat() {
+        getY();
+        if (y_binary_format == null) {
+            setY_binary_format();
+        }
+        return y_binary_format;
+    }
+
+    private static void setY_binary_format() {
+        y_binary_format = new DenseDoubleMatrix(X_SIZE, OUTPUT_LAYER_SIZE);
+        for (int i = 0; i < X_SIZE; ++i) {
+            y_binary_format.set(i, (int) y.get(0, i), 1);
+        }
     }
 
 }
