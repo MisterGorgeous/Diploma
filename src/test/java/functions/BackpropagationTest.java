@@ -15,8 +15,7 @@ public class BackpropagationTest {
 
     @Test
     public void calculateCost() throws Exception {
-        Backpropagation.calculateCost();
-        double J = Backpropagation.getJ();
+        double J = Backpropagation.calculateCost(Backpropagation.getTheta1(),Backpropagation.getTheta2());
         System.out.print(J);
     }
 

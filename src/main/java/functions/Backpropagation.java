@@ -13,7 +13,7 @@ public class Backpropagation {
     private static DenseDoubleMatrix theta2 = RandomInitialization.randInitialize(16,10,0.12);
     private static DenseDoubleMatrix theta1_grad = new DenseDoubleMatrix(257,16,0);
     private static DenseDoubleMatrix theta2_grad = new DenseDoubleMatrix(17,10,0);
-    private static double J;
+    //private static double J;
     private static final double lambda = 1;
 
 
@@ -47,7 +47,8 @@ public class Backpropagation {
         }
     }
 
-    public static void calculateCost(){
+    public static double calculateCost(DenseDoubleMatrix theta1,DenseDoubleMatrix theta2){
+        double J;
         DenseDoubleMatrix x = HandWritenDigits.getX();
         x = Normalization.addA0asColumn(x);
         DenseDoubleMatrix h = (DenseDoubleMatrix) x.multiply(theta1.transpose());
@@ -63,8 +64,10 @@ public class Backpropagation {
         DenseDoubleMatrix theta1FromSec = Normalization.dellA0AsColumn(theta1);
         DenseDoubleMatrix theta2FromSec = Normalization.dellA0AsColumn(theta2);
         double reg = theta1FromSec.multiplyElementWise(theta1FromSec).sum() + theta2FromSec.multiplyElementWise(theta2FromSec).sum();
-        J = J + reg;
+        return J + reg;
     }
+
+
 
     public static DenseDoubleMatrix getTheta1() {
         return theta1;
@@ -82,7 +85,7 @@ public class Backpropagation {
         return theta2_grad;
     }
 
-    public static double getJ() {
+    /*public static double getJ() {
         return J;
-    }
+    }*/
 }
