@@ -93,12 +93,29 @@ public class Backpropagation implements CostFunction {
 
     @Override
     public CostGradientTuple evaluateCost(DoubleVector doubleVector) {
-        theta1 = new DenseDoubleMatrix(257,16,doubleVector.slice(257*16).toArray());
-        theta2 = new DenseDoubleMatrix(17,10,doubleVector.slice(257*16,doubleVector.getLength()).toArray());
+        theta1 = new DenseDoubleMatrix(16,257,doubleVector.slice(257*16).toArray());
+        theta2 = new DenseDoubleMatrix(10,17,doubleVector.slice(257*16,doubleVector.getLength()).toArray());
 
         calculate();
+        double cost = calculateCost(theta1,theta2);
 
+       /* int numElTheta1 = theta1_grad.getColumnCount()*theta1_grad.getRowCount();
+        int numElTheta2 = theta2_grad.getColumnCount()*theta2_grad.getRowCount();
 
-        return  new CostGradientTuple();
+        DenseDoubleVector gradVector = new DenseDoubleVector( numElTheta1 + numElTheta2);
+
+        for (int i = 0; i < theta1_grad.getRowCount(); ++i) {
+            for (int j = 0; j < theta1_grad.getColumnCount(); ++j) {
+                gradVector.set(theta1_grad.getColumnCount()*i + j,theta1_grad.get(i, j));
+            }
+        }
+
+        for (int i = 0; i < theta2_grad.getRowCount(); ++i) {
+            for (int j = 0; j < theta2_grad.getColumnCount(); ++j) {
+                gradVector.set(numElTheta1 + theta2_grad.getColumnCount()*i + j,theta2_grad.get(i, j));
+            }
+        }*/
+
+        return  new CostGradientTuple(cost, MatrixOperations.matrixsToVector(theta1_grad,theta2_grad));
     }
 }
