@@ -11,6 +11,7 @@ import de.jungblut.math.minimize.CostGradientTuple;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Backpropagation implements CostFunction {
     private static DenseDoubleMatrix theta1 = RandomInitialization.randInitialize(256, 16, 0.12);
     private static DenseDoubleMatrix theta2 = RandomInitialization.randInitialize(16, 10, 0.12);
@@ -98,23 +99,6 @@ public class Backpropagation implements CostFunction {
 
         calculate();
         double cost = calculateCost(theta1,theta2);
-
-       /* int numElTheta1 = theta1_grad.getColumnCount()*theta1_grad.getRowCount();
-        int numElTheta2 = theta2_grad.getColumnCount()*theta2_grad.getRowCount();
-
-        DenseDoubleVector gradVector = new DenseDoubleVector( numElTheta1 + numElTheta2);
-
-        for (int i = 0; i < theta1_grad.getRowCount(); ++i) {
-            for (int j = 0; j < theta1_grad.getColumnCount(); ++j) {
-                gradVector.set(theta1_grad.getColumnCount()*i + j,theta1_grad.get(i, j));
-            }
-        }
-
-        for (int i = 0; i < theta2_grad.getRowCount(); ++i) {
-            for (int j = 0; j < theta2_grad.getColumnCount(); ++j) {
-                gradVector.set(numElTheta1 + theta2_grad.getColumnCount()*i + j,theta2_grad.get(i, j));
-            }
-        }*/
 
         return  new CostGradientTuple(cost, MatrixOperations.matrixsToVector(theta1_grad,theta2_grad));
     }

@@ -28,7 +28,7 @@ public class BackpropagationTest {
         //double cost = Backpropagation.calculateCost(Backpropagation.getTheta1(),Backpropagation.getTheta2())
         DenseDoubleVector vector = MatrixOperations.matrixsToVector(Backpropagation.getTheta1(),Backpropagation.getTheta2());
         CostGradientTuple costGradientTuple = backpropagation.evaluateCost(vector);
-        System.out.print(costGradientTuple);
+        System.out.print(costGradientTuple.getCost());
     }
 
 }

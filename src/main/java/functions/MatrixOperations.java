@@ -22,18 +22,20 @@ public class MatrixOperations {
 
         DenseDoubleVector vector = new DenseDoubleVector( numElTheta1 + numElTheta2);
 
-        for (int i = 0; i < matrix1.getRowCount(); ++i) {
-            for (int j = 0; j < matrix1.getColumnCount(); ++j) {
-                vector.set(matrix1.getColumnCount()*i + j,matrix1.get(i, j));
+        for (int j = 0; j < matrix1.getColumnCount(); ++j) {
+            for (int i = 0; i < matrix1.getRowCount(); ++i) {
+                vector.set(matrix1.getRowCount()*j + i,matrix1.get(i, j));
             }
         }
 
-        for (int i = 0; i < matrix2.getRowCount(); ++i) {
-            for (int j = 0; j < matrix2.getColumnCount(); ++j) {
-                vector.set(numElTheta1 + matrix2.getColumnCount() * i + j, matrix2.get(i, j));
+        for (int j = 0; j < matrix2.getColumnCount(); ++j) {
+            for (int i = 0; i < matrix2.getRowCount(); ++i) {
+                vector.set(numElTheta1 + matrix2.getRowCount()*j + i, matrix2.get(i, j));
             }
         }
         return vector;
     }
+
+
 
 }
