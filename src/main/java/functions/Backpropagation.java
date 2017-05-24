@@ -40,6 +40,17 @@ public class Backpropagation implements CostFunction {
         return copy;
     }
 
+    public static DenseDoubleVector getTheta1and2AsVector() {
+        return MatrixOperations.matrixsToVector(theta1,theta2);
+    }
+
+    public static boolean setTheta1and2AsVector(DenseDoubleVector vector) {
+        theta1 = new DenseDoubleMatrix(16,257,vector.slice(257*16).toArray());
+        theta2 = new DenseDoubleMatrix(10,17,vector.slice(257*16,vector.getLength()).toArray());
+        return true;
+    }
+
+
 
     public static void calculate() {
         for (int i = 0; i < HandWritenDigits.X_SIZE; ++i) {
