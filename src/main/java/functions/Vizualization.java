@@ -22,8 +22,8 @@ public class Vizualization {
             String str = digits.get(line+1);
             Pattern p = Pattern.compile("[0-9\\.]{1,}");
             Matcher m = p.matcher(str);
-            for(int i=0;i<256;++i){
-                if(i%16 == 0){
+            for(int i = 0; i< Initialization.INPUT_LAYER_SIZE; ++i){
+                if(i% Initialization.SECCOND_LAYER_SIZE == 0){
                     System.out.println();
                 }
                 m.find();

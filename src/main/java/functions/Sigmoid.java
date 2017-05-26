@@ -8,7 +8,7 @@ public class Sigmoid {
     public static DenseDoubleMatrix sigmoid(DenseDoubleMatrix matrix){
         DoubleVector[] vectors = new DoubleVector[ matrix.getRowCount()];
         for(int i=0; i < matrix.getRowCount(); ++i ){
-            vectors[i] =  matrix.getRowVector(i).exp().divideFrom(1).add(1).divideFrom(1);
+            vectors[i] =  matrix.getRowVector(i).multiply(-1).exp().add(1).divideFrom(1);
         }
         DenseDoubleMatrix copy = new DenseDoubleMatrix(vectors);
         return copy;

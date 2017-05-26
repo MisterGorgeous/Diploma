@@ -4,24 +4,29 @@ package functions;
 import de.jungblut.math.dense.DenseDoubleMatrix;
 
 public class NumericalGradient {
-    private static DenseDoubleMatrix numGradientTheta1 = RandomInitialization.randInitialize(256,16,0);
-    private static DenseDoubleMatrix numGradientTheta2 = RandomInitialization.randInitialize(16,10,0);
+    private static DenseDoubleMatrix numGradientTheta1 = Initialization.randInitialize(Initialization.INPUT_LAYER_SIZE , Initialization.SECCOND_LAYER_SIZE,0);
+    private static DenseDoubleMatrix numGradientTheta2 = Initialization.randInitialize(Initialization.SECCOND_LAYER_SIZE, Initialization.OUTPUT_LAYER_SIZE,0);
     private static double epsilon = 0.0001;
     private static double minusEpsilon;
     private static double plussEpsilon;
     private static double grad;
-    private static DenseDoubleMatrix theta1 = Backpropagation.getTheta1();
-    private static DenseDoubleMatrix theta2 = Backpropagation.getTheta2();
+    private static DenseDoubleMatrix theta1;
+    private static DenseDoubleMatrix theta2;
 
     public static DenseDoubleMatrix getNumGradientTheta1() {
-        return numGradientTheta1;
+        DenseDoubleMatrix copy = new DenseDoubleMatrix(numGradientTheta1.toArray());
+        return copy;
     }
 
     public static DenseDoubleMatrix getNumGradientTheta2() {
-        return numGradientTheta2;
+        DenseDoubleMatrix copy = new DenseDoubleMatrix(numGradientTheta2.toArray());
+        return copy;
     }
 
     public static void calculateNumGrad(){
+        theta1 = Backpropagation.getTheta1();
+        theta2 = Backpropagation.getTheta2();
+
         calculateTheta(theta1,numGradientTheta1);
         calculateTheta(theta2,numGradientTheta2);
     }
@@ -41,4 +46,6 @@ public class NumericalGradient {
             }
         }
     }
+
+
 }

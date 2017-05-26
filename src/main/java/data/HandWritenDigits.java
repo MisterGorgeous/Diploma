@@ -3,6 +3,7 @@ package data;
 import de.jungblut.math.DoubleVector;
 import de.jungblut.math.dense.DenseDoubleMatrix;
 import de.jungblut.math.dense.DenseDoubleVector;
+import functions.Initialization;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -18,9 +19,8 @@ public class HandWritenDigits {
     private static DenseDoubleMatrix y_binary_format;
     private static final String PATH = "S:\\git_rep\\Diploma\\src\\main\\resources\\semeion.txt";
     private static final String REGEXP = "[0-9\\.]{1,}";
-    private static final int VECTOR_SIZE = 256;
-    private static final int OUTPUT_LAYER_SIZE = 10;
-    public static final int X_SIZE = 1593;
+
+    public static  int X_SIZE = 1590;
 
 
     public static DenseDoubleMatrix getXRowMat(int index) {
@@ -35,7 +35,7 @@ public class HandWritenDigits {
         if (x == null) {
             load();
         }
-        return x;
+        return new DenseDoubleMatrix(x.toArray());
     }
 
     private static void load() {
@@ -51,8 +51,8 @@ public class HandWritenDigits {
                 Pattern p = Pattern.compile(REGEXP);
                 Matcher m = p.matcher(str);
 
-                DenseDoubleVector vector = new DenseDoubleVector(VECTOR_SIZE);
-                for (int i = 0; i < VECTOR_SIZE; ++i) {
+                DenseDoubleVector vector = new DenseDoubleVector(Initialization.INPUT_LAYER_SIZE);
+                for (int i = 0; i < Initialization.INPUT_LAYER_SIZE; ++i) {
                     m.find();
                     double value = Double.parseDouble(m.group());
                     vector.set(i, value);
@@ -67,7 +67,7 @@ public class HandWritenDigits {
         if (y == null) {
             setY();
         }
-        return y;
+        return new DenseDoubleMatrix(y.toArray());
     }
 
     private static void setY() {
@@ -93,13 +93,15 @@ public class HandWritenDigits {
         if (y_binary_format == null) {
             setY_binary_format();
         }
-        return y_binary_format;
+        return new DenseDoubleMatrix(y_binary_format.toArray());
     }
 
     private static void setY_binary_format() {
-        y_binary_format = new DenseDoubleMatrix(X_SIZE, OUTPUT_LAYER_SIZE);
+        y_binary_format = new DenseDoubleMatrix(X_SIZE, Initialization.OUTPUT_LAYER_SIZE);
         for (int i = 0; i < X_SIZE; ++i) {
-            y_binary_format.set(i, (int) y.get(0, i), 1);
+            if((int) y.get(0, i) < Initialization.OUTPUT_LAYER_SIZE ) {
+                y_binary_format.set(i, (int) y.get(0, i), 1);
+            }
         }
     }
 

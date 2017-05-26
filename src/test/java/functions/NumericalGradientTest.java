@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 
 public class NumericalGradientTest {
+
     @Test
     public void calculateNumGrad() throws Exception {
         Backpropagation.calculate();
@@ -20,7 +21,11 @@ public class NumericalGradientTest {
         double difference = theta1_grad.subtract(numGradientTheta1).sum();
         difference += theta2_grad.subtract(numGradientTheta2).sum();
 
-        System.out.print(difference);
+
+        System.out.println("Sum backpropo Gradient:" + theta1_grad.sum() + " " + theta2_grad.sum());
+        System.out.println("Sum check Gradient:" + numGradientTheta1.sum() + " " + numGradientTheta2.sum());
+        System.out.println("difference:" + difference);
+
     }
 
 }
