@@ -99,9 +99,9 @@ public class HandWritenDigits {
     private static void setY_binary_format() {
         y_binary_format = new DenseDoubleMatrix(X_SIZE, Initialization.OUTPUT_LAYER_SIZE);
         for (int i = 0; i < X_SIZE; ++i) {
-            if((int) y.get(0, i) < Initialization.OUTPUT_LAYER_SIZE ) {
+           // if((int) y.get(0, i) < Initialization.OUTPUT_LAYER_SIZE ) {
                 y_binary_format.set(i, (int) y.get(0, i), 1);
-            }
+          //  }
         }
     }
 

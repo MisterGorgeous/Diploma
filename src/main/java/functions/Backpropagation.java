@@ -125,7 +125,11 @@ public class Backpropagation implements CostFunction {
                 doubleVector.slice((Initialization.INPUT_LAYER_SIZE + 1) * Initialization.SECCOND_LAYER_SIZE, doubleVector.getLength()).toArray());
 
         calculate();
-        double cost = calculateCost(theta1, theta2);
+        double cost = calculateCost(theta1_grad.transpose(), theta2_grad.transpose());
+        //double cost = calculateCost(theta1, theta2);
+
+        theta1 = theta1_grad.transpose();
+        theta2 = theta2_grad.transpose();
 
         return new CostGradientTuple(cost, MatrixOperations.matrixsToVector(theta1_grad, theta2_grad));
     }

@@ -36,8 +36,10 @@ public class LearnAndPredict {
         DenseDoubleMatrix matrix = HandWritenDigits.getXRowMat(i);
         matrix = Normalization.addA0asColumn(matrix);
         DenseDoubleMatrix h = (DenseDoubleMatrix) matrix.multiply(Backpropagation.getTheta1().transpose());
+        h = Sigmoid.sigmoid(h);
         h = Normalization.addA0asColumn(h);
         h = (DenseDoubleMatrix) h.multiply(Backpropagation.getTheta2().transpose());
+        h = Sigmoid.sigmoid(h);
         return classification(h);
     }
 }
