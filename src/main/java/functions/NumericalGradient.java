@@ -26,25 +26,38 @@ public class NumericalGradient {
     public static void calculateNumGrad(){
         theta1 = Backpropagation.getTheta1();
         theta2 = Backpropagation.getTheta2();
-
-        calculateTheta(theta1,numGradientTheta1);
-        calculateTheta(theta2,numGradientTheta2);
+        calculateTheta();
     }
 
-    private static void calculateTheta( DenseDoubleMatrix theta,DenseDoubleMatrix numGrad){
+    private static void calculateTheta( ){
 
-        for (int i = 0; i < numGrad.getRowCount(); ++i) {
-            for (int j = 0; j < numGrad.getColumnCount(); ++j) {
+        for (int i = 0; i < numGradientTheta1.getRowCount(); ++i) {
+            for (int j = 0; j < numGradientTheta1.getColumnCount(); ++j) {
                 //result.set(i, j, Math.log(matrix.get(i, j)));
-                theta.set(i,j,theta.get(i,j) - epsilon);
+                theta1.set(i,j,theta1.get(i,j) - epsilon);
                 minusEpsilon = Backpropagation.calculateCost(theta1,theta2);
-                theta.set(i,j,theta.get(i,j) + 2*epsilon);
+                theta1.set(i,j,theta1.get(i,j) + 2*epsilon);
                 plussEpsilon = Backpropagation.calculateCost(theta1,theta2);
                 grad = (plussEpsilon - minusEpsilon)/(2*epsilon);
-                numGrad.set(i,j,grad);
-                theta.set(i,j,theta.get(i,j) - epsilon);
+                numGradientTheta1.set(i,j,grad);
+                theta1.set(i,j,theta1.get(i,j) - epsilon);
             }
         }
+
+        for (int i = 0; i < numGradientTheta2.getRowCount(); ++i) {
+            for (int j = 0; j < numGradientTheta2.getColumnCount(); ++j) {
+                //result.set(i, j, Math.log(matrix.get(i, j)));
+                theta2.set(i,j,theta2.get(i,j) - epsilon);
+                minusEpsilon = Backpropagation.calculateCost(theta1,theta2);
+                theta2.set(i,j,theta2.get(i,j) + 2*epsilon);
+                plussEpsilon = Backpropagation.calculateCost(theta1,theta2);
+                grad = (plussEpsilon - minusEpsilon)/(2*epsilon);
+                numGradientTheta2.set(i,j,grad);
+                theta2.set(i,j,theta2.get(i,j) - epsilon);
+            }
+        }
+
+
     }
 
 

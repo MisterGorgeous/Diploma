@@ -37,5 +37,14 @@ public class MatrixOperations {
     }
 
 
+    public static double sum(DenseDoubleMatrix matrix){
+        double sum = 0;
+        for (int j = 0; j < matrix.getColumnCount(); ++j) {
+            for (int i = 0; i < matrix.getRowCount(); ++i) {
+                sum += matrix.get(i, j);
+            }
+        }
+        return sum;
+    }
 
 }

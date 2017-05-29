@@ -29,7 +29,7 @@ public class LearnAndPredict {
        // Fmincg fmincg = new Fmincg();
         DenseDoubleVector vector = Backpropagation.getTheta1and2AsVector();
         DenseDoubleVector result = (DenseDoubleVector) Fmincg.minimizeFunction(backpropagation,vector,50,true);
-        Backpropagation.setTheta1and2AsVector(result);
+       // Backpropagation.setTheta1and2AsVector(result);
     }
 
     public static double predict(int i) {

@@ -45,6 +45,12 @@ public class Backpropagation implements CostFunction {
         return MatrixOperations.matrixsToVector(getTheta1(), getTheta2());
     }
 
+    public static boolean substractGradient(){
+        theta1 = (DenseDoubleMatrix) theta1.subtract(theta1_grad.transpose());
+        theta2 = (DenseDoubleMatrix) theta2.subtract(theta2_grad.transpose());
+        return true;
+    }
+
     public static boolean setTheta1and2AsVector(DenseDoubleVector vector) {
         theta1 = new DenseDoubleMatrix(Initialization.SECCOND_LAYER_SIZE, Initialization.INPUT_LAYER_SIZE + 1, vector.slice(
                 (Initialization.INPUT_LAYER_SIZE + 1) * Initialization.SECCOND_LAYER_SIZE).toArray());
@@ -125,12 +131,13 @@ public class Backpropagation implements CostFunction {
                 doubleVector.slice((Initialization.INPUT_LAYER_SIZE + 1) * Initialization.SECCOND_LAYER_SIZE, doubleVector.getLength()).toArray());
 
         calculate();
-        double cost = calculateCost(theta1_grad.transpose(), theta2_grad.transpose());
+        substractGradient();
+        double cost = calculateCost(theta1, theta2);
         //double cost = calculateCost(theta1, theta2);
 
-        theta1 = theta1_grad.transpose();
-        theta2 = theta2_grad.transpose();
+        /*theta1 = theta1_grad.transpose();
+        theta2 = theta2_grad.transpose();*/
 
-        return new CostGradientTuple(cost, MatrixOperations.matrixsToVector(theta1_grad, theta2_grad));
+        return new CostGradientTuple(cost, MatrixOperations.matrixsToVector(theta1,theta2));
     }
 }

@@ -33,4 +33,14 @@ public class MatrixOperationsTest {
         assertArrayEquals(result,vector.toArray(),0.0001);
     }
 
+    @Test
+    public void sum() throws Exception {
+        double[] first = {-1,2,-3,4,9,-10};
+        DenseDoubleMatrix firstMatrix = new DenseDoubleMatrix(3,2,first);
+        double resTom = firstMatrix.sum();
+        double resM = MatrixOperations.sum(firstMatrix);
+        assertEquals(resM,resTom,0.0001);
+    }
+
+
 }
